@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Newsreader", "Source Serif 4", Georgia, serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-kertas: #f5f6f8;
+  --color-permukaan: #ffffff;
+  --color-tinta: #14213d;
+  --color-tinta-lembut: #4a5568;
+  --color-garis: #dde1e8;
+  --color-idn: #ce1126;
+  --color-negara-lain: #8b95a5;
+  --color-mengejar: #0f766e;
+  --color-unggul: #1d4ed8;
+  --color-stagnan: #64748b;
+  --color-tertinggal: #b45309;
+
+  /* radius mengikuti hierarki */
+  --radius-kartu-besar: 1.75rem;
+  --radius-kartu: 1.125rem;
+  --radius-chip: 0.5rem;
+
+  --shadow-kaca: 0 10px 32px -14px rgb(20 33 61 / 0.22);
+}
+
+@layer base {
+  html {
+    background: var(--color-kertas);
+    color: var(--color-tinta);
+    font-family: var(--font-sans);
+    scroll-padding-top: 5rem; /* tinggi header sticky */
+    -webkit-text-size-adjust: 100%;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-tinta);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* Kaca: dipakai HANYA di header dan tooltip */
+@utility kaca {
+  background: var(--color-permukaan);
+  box-shadow: var(--shadow-kaca);
+  @supports (backdrop-filter: blur(1px)) {
+    background: color-mix(in srgb, var(--color-permukaan) 74%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    background: var(--color-permukaan);
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
